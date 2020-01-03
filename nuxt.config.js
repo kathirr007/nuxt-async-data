@@ -63,8 +63,8 @@ module.exports = {
   ** axios configuration
   */
   axios: {
-    baseURL: 'https://jsonplaceholder.typicode.com',
-    proxy: true
+    // baseURL: 'https://jsonplaceholder.typicode.com',
+    baseURL: process.env.BASE_URL || 'https://jsonplaceholder.typicode.com'
   },
 
   proxy: {
