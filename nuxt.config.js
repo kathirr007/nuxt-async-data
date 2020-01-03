@@ -1,6 +1,11 @@
+/* eslint-disable */
 const pkg = require('./package')
 
 module.exports = {
+  server: {
+    // port: 3100, // default 3000
+    port: process.env.PORT || 3300
+  },
   mode: 'universal',
 
   generate: {
@@ -35,7 +40,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '~/assets/style.css'
+    '~/assets/style.scss'
   ],
 
   /*
@@ -49,14 +54,26 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    // proxy module
+    '@nuxtjs/proxy',
   ],
 
   /*
   ** axios configuration
   */
   axios: {
-    baseURL: 'https://jsonplaceholder.typicode.com'
+    baseURL: 'https://jsonplaceholder.typicode.com',
+    proxy: true
+  },
+
+  proxy: {
+    // '/missions?': 'http://contentplace.x1.fr/missions?',
+    // 'http://localhost:3100/missions?': 'http://contentplace.x1.fr',
+    /* '/posts': {
+      target: 'http://contentplace.x1.fr/missions?client_secret=%242y%2410%24r1u8S82qpoLo.ASFBnUQCe6MGJhOyuGYderz5fA64asogQ3LFpJIi&mission_status=ongoing',
+      pathRewrite: {'^/posts': ''}
+    }, */
   },
 
   /*

@@ -16,6 +16,7 @@
           class="button--grey"
         >
           {{post.title}}
+          <!-- {{post.mission_name}} -->
         </nuxt-link>
       </div>
     </div>
@@ -24,6 +25,7 @@
 
 <script>
 import Logo from '~/components/Logo.vue'
+import axios from 'axios'
 
 export default {
   components: {
@@ -44,10 +46,46 @@ export default {
     // dispatch action fetchAllPosts
     await store.dispatch('posts/fetchAllPosts')
   },
-  computed: {
+  /* data(){
+    return {
+      posts : []
+    }
+  }, */
+  async asyncData(context) {
+    // console.log(context)
+    /* let response = await axios.get('https://jsonplaceholder.typicode.com/posts')
+    return {posts: response.data} */
+    let response = await axios.get('https://jsonplaceholder.typicode.com/posts')
+    // console.log(response)
+    return {posts: response.data}
+  },
+/*   asyncData() {
+    return axios.get('https://jsonplaceholder.typicode.com/posts')
+      .then(response => {
+        return {posts: response.data}
+      })
+  }, */
+  /* computed: {
     posts () {
       return this.$store.state.posts.all
     }
+  }, */
+  mounted () {
+      /* this.$axios.$get('/posts')
+        .then(response => {
+          this.posts = response
+      }) */
+      /* axios.get('https://jsonplaceholder.typicode.com/posts')
+        .then(response => {
+          this.posts = response.data
+        }) */
+    /* fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => {
+        response.json().then(posts => {
+          // console.log(posts)
+          this.posts = posts
+        })
+      }) */
   },
 }
 </script>

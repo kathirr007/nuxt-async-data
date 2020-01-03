@@ -8,6 +8,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     head () {
       return {
@@ -22,17 +23,39 @@
     },
     data () {
       return {
-        id: this.$route.params.id
+        id: this.$route.params.id,
+        // post: {}
       }
     },
     async fetch ({store, params}) {
       await store.dispatch('posts/fetchPost', params.id)
     },
-    computed: {
+    /* computed: {
       post () {
         return this.$store.state.posts.all.find(post => post.id === Number(this.id))
       }
+    }, */
+    async asyncData({params}) {
+      // console.log(context)
+      let response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
+      return {post: response.data}
     },
+    mounted() {
+      /* this.$axios.$get(`https://jsonplaceholder.typicode.com/posts/${this.id}`)
+        .then(response => {
+          this.post = response
+        }) */
+      /* axios.get(`https://jsonplaceholder.typicode.com/posts/${this.id}`)
+        .then(response => {
+          this.post = response.data
+        }) */
+      /* fetch(`https://jsonplaceholder.typicode.com/posts/${this.id}`)
+        .then(response => {
+          response.json().then(post => {
+            this.post = post
+          })
+        }) */
+    }
   }
 </script>
 
