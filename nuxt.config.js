@@ -34,7 +34,8 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  // loading: { color: '#fff' },
+  loading: false,
 
   /*
   ** Global CSS
@@ -64,7 +65,8 @@ module.exports = {
   */
   axios: {
     // baseURL: 'https://jsonplaceholder.typicode.com',
-    baseURL: process.env.BASE_URL || 'https://jsonplaceholder.typicode.com'
+    // baseURL: process.env.BASE_URL || 'https://jsonplaceholder.typicode.com'
+    baseURL: process.env.BASE_URL || 'http://localhost:3300'
   },
 
   proxy: {

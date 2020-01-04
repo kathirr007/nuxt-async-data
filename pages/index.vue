@@ -11,12 +11,12 @@
       <div class="links">
         <nuxt-link
           v-for="post in posts"
-          :to="{name: 'posts-id', params: {id: post.id}}"
-          :key="post.id"
+          :to="{name: 'posts-id', params: {id: post.mission_id}}"
+          :key="post.mission_id"
           class="button--grey"
         >
-          {{post.title}}
-          <!-- {{post.mission_name}} -->
+          <!-- {{post.title.capitalize(true)}} -->
+          {{post.mission_name}}
         </nuxt-link>
       </div>
     </div>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import missionsList from '~/static/missions-list.json'
 import Logo from '~/components/Logo.vue'
 import axios from 'axios'
 
@@ -42,22 +43,25 @@ export default {
       ]
     }
   },
-  async fetch ({store}) {
+  /* async fetch ({store}) {
     // dispatch action fetchAllPosts
     await store.dispatch('posts/fetchAllPosts')
-  },
-  /* data(){
+  }, */
+  data(){
     return {
       posts : []
     }
-  }, */
-  async asyncData(context) {
+  },
+  async asyncData({$axios}) {
     // console.log(context)
-    /* let response = await axios.get('https://jsonplaceholder.typicode.com/posts')
-    return {posts: response.data} */
-    let response = await axios.get('https://jsonplaceholder.typicode.com/posts')
-    // console.log(response)
-    return {posts: response.data}
+    /* let posts = await $axios.$get('https://jsonplaceholder.typicode.com/posts')
+    return {posts} */
+    /* let posts = await $axios.$get('http://contentplace.x1.fr/missions?mission_status=draft&client_secret=$2y$10$r1u8S82qpoLo.ASFBnUQCe6MGJhOyuGYderz5fA64asogQ3LFpJIi')
+    console.log(posts)
+    return {posts} */
+    let posts = await missionsList.data.prodMission
+    // console.log(posts)
+    return {posts}
   },
 /*   asyncData() {
     return axios.get('https://jsonplaceholder.typicode.com/posts')
@@ -71,6 +75,10 @@ export default {
     }
   }, */
   mounted () {
+      /* this.$axios.$get('http://localhost:3300/static/missions-list.json')
+        .then(response => {
+          this.posts = response
+      }) */
       /* this.$axios.$get('/posts')
         .then(response => {
           this.posts = response
@@ -86,6 +94,12 @@ export default {
           this.posts = posts
         })
       }) */
+  },
+  transition(to, from) {
+    if (!from) {
+      return 'slide-left'
+    }
+    return 'slide-right'
   },
 }
 </script>

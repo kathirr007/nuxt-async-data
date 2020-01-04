@@ -7,10 +7,22 @@
 
 <script>
   import TheNavbar from '@/components/TheNavbar'
+  String.prototype.capitalize = function(lower) {
+      return (lower ? this.toLowerCase() : this).replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+  }
   export default {
     components: {
       TheNavbar
-    }
+    },
+    computed:{
+
+    },
+    transition(to, from) {
+      if (!from) {
+        return 'slide-left'
+      }
+      return 'slide-right'
+    },
   }
 </script>
 
