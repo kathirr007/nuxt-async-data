@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <article>
-      <h1 class="title">{{post[0].mission_name.capitalize(true)}}</h1>
-      <p>{{post[0].contract_name}}</p>
+      <h1 class="title">{{mission_name.capitalize(true)}}</h1>
+      <p>{{contract_name}}</p>
     </article>
   </div>
 </template>
@@ -19,10 +19,10 @@
     },
     head () {
       return {
-        title: this.post[0].mission_name.capitalize(true),
+        title: this.mission_name.capitalize(true),
         meta: [
-          { name: 'twitter:title', content: this.post[0].mission_title},
-          { name: 'twitter:description', content: this.post[0].contract_name},
+          { name: 'twitter:title', content: this.mission_title},
+          { name: 'twitter:description', content: this.contract_name},
           { name: 'twitter:image', content: 'https://i.imgur.com/UYP2umJ.png'},
           { name: 'twitter:card', content: 'summary_large_image'}
         ]
@@ -53,8 +53,8 @@
       let post = await missionsList.data.prodMission.filter((post) => {
         return post.mission_id === params.id
       })
-      console.log(post)
-      return {post}
+      // console.log({...post[0]})
+      return {...post[0]}
     },
     mounted() {
       /* this.$axios.$get(`https://jsonplaceholder.typicode.com/posts/${this.id}`)
