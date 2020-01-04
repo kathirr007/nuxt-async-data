@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <article>
-      <h1 class="title">{{mission_name.capitalize(true)}}</h1>
+      <h1 class="title" v-html="mission_name.capitalize(true)">
+        <!-- {{mission_name.capitalize(true)}} -->
+      </h1>
       <p>{{contract_name}}</p>
     </article>
   </div>

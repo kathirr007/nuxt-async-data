@@ -14,9 +14,10 @@
           :to="{name: 'posts-id', params: {id: post.mission_id}}"
           :key="post.mission_id"
           class="button--grey"
+          v-html="post.mission_name"
         >
           <!-- {{post.title.capitalize(true)}} -->
-          {{post.mission_name}}
+          <!-- {{post.mission_name}} -->
         </nuxt-link>
       </div>
     </div>
